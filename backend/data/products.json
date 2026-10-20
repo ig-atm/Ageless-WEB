@@ -1,0 +1,66 @@
+[
+  {
+    "id": "deep-sleep",
+    "name": "Deep Sleep",
+    "subtitle": "Rest & Circadian Rhythm Support",
+    "price": 64,
+    "color": "#B99B89",
+    "imagePath": "/uploads/products/deep-sleep.png",
+    "description": "A bio-optimized restorative night formula designed to naturally align your circadian biology, modulate nocturnal cortisol spikes, and guide neural pathways into sustained deep slow-wave and REM sleep phases.",
+    "benefits": [
+      "Facilitates smooth, natural transition into deep sleep without next-day brain fog",
+      "Prolongs restorative REM & slow-wave stages for neurological cellular repair",
+      "Calms evening autonomic HPA-axis activation and nocturnal muscle tension",
+      "Formulated with Chelated Magnesium Bisglycinate, L-Theanine, Apigenin & Tart Cherry"
+    ],
+    "howToConsume": "Take 2 capsules with 250ml of warm water or chamomile tea 45–60 minutes before bed. Dim artificial lighting after consumption to maximize endogenous melatonin synergy."
+  },
+  {
+    "id": "glass-glow",
+    "name": "Glass Glow",
+    "subtitle": "Skin, Hair & Cellular Matrix",
+    "price": 78,
+    "color": "#D8B4AE",
+    "imagePath": "/uploads/products/glass-glow.png",
+    "description": "A clinical-grade dermal elixir combining bioavailable marine collagen peptides, liposomal glutathione, cold-extracted phytoceramides, and botanical hyaluronic acid to fortify your extracellular matrix and awaken translucent skin luminosity.",
+    "benefits": [
+      "Stimulates endogenous Type I & III collagen synthesis to enhance skin density",
+      "Fortifies lipid moisture barrier against environmental oxidative pollution",
+      "Diminishes appearance of fine micro-creases while boosting dermal hydration",
+      "Enriched with Liposomal Glutathione, French Maritime Pine Bark & Biotin"
+    ],
+    "howToConsume": "Stir 1 level scoop (6g) into 200ml of room temperature water, coconut water, or your morning matcha. Best enjoyed in the morning 20 minutes before breakfast."
+  },
+  {
+    "id": "slim-support",
+    "name": "Slim Support",
+    "subtitle": "Metabolic Harmony & AMPK Activation",
+    "price": 72,
+    "color": "#9EAA96",
+    "imagePath": "/uploads/products/slim-support.png",
+    "description": "An advanced phytotherapeutic compound engineered to activate the cellular AMPK longevity pathway, moderate postprandial glucose surges, and sustain metabolic equilibrium throughout demanding days.",
+    "benefits": [
+      "Activates AMPK longevity switch to optimize nutrient partitioning",
+      "Buffers post-meal glucose spikes and attenuates mid-afternoon energy slumps",
+      "Promotes mitochondrial fatty acid beta-oxidation and gut microbiome harmony",
+      "Features Micro-encapsulated Berberine Phytosome, Chromium & Decaf EGCG"
+    ],
+    "howToConsume": "Take 1 capsule twice daily, approximately 15 minutes before your two main meals of the day with water. Maintain consistent daily timing for optimal glycemic balance."
+  },
+  {
+    "id": "clear-vision-omega-3",
+    "name": "Clear Vision Omega-3",
+    "subtitle": "Retinal Longevity & Neural Focus",
+    "price": 68,
+    "color": "#91ACB5",
+    "imagePath": "/uploads/products/clear-vision-omega-3.png",
+    "description": "Sustainably harvested from wild Arctic fisheries using gentle supercritical CO2 extraction. Calibrated with clinical ratios of EPA, DHA, FloraGLO® Lutein, Zeaxanthin, and natural Astaxanthin to safeguard macular integrity and sharpen cognitive acuity.",
+    "benefits": [
+      "Shields delicate photoreceptor cells against high-energy blue light emissions",
+      "Soothes digital eye strain, dryness, and visual fatigue during screen work",
+      "Nourishes neural phospholipid membranes for sustained executive mental clarity",
+      "Zero fishy regurgitation, gently flavored with cold-pressed Sicilian organic orange oil"
+    ],
+    "howToConsume": "Take 2 softgels daily with a meal containing healthy dietary fats (e.g. avocado, olive oil, or whole eggs) for optimal carotenoid and lipid absorption."
+  }
+]
