@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API_BASE_URL = "http://localhost:5001/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "";
+
+const getProductImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  if (imagePath.startsWith("http")) return imagePath;
+  return `${BACKEND_BASE_URL}${imagePath}`;
+};
 
 const BRAND_PALETTE = [
   { name: "Soft Clay", hex: "#B99B89" },
@@ -68,7 +75,7 @@ export default function AdminDashboard({ onBackToStorefront }) {
       }
     } catch (err) {
       console.error("CRM Fetch Error:", err);
-      notify("CRM API server unreachable on port 5001. Ensure server is running.", "error");
+      notify("CRM API server unreachable. Ensure backend service is running.", "error");
     } finally {
       setLoading(false);
     }
@@ -174,13 +181,7 @@ export default function AdminDashboard({ onBackToStorefront }) {
       howToConsume: product.howToConsume || "",
       benefits: Array.isArray(product.benefits) ? product.benefits : []
     });
-    setImagePreview(
-      product.imagePath
-        ? product.imagePath.startsWith("http")
-          ? product.imagePath
-          : `http://localhost:5001${product.imagePath}`
-        : null
-    );
+    setImagePreview(getProductImageUrl(product.imagePath));
     setSelectedFile(null);
 
     // Scroll form smoothly into view
@@ -445,7 +446,7 @@ export default function AdminDashboard({ onBackToStorefront }) {
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <p className="font-medium text-sm text-[#383B35]">Express API Active</p>
             </div>
-            <p className="text-[11px] text-[#6B6E65] mt-1">Port 5001 • REST Endpoints</p>
+            <p className="text-[11px] text-[#6B6E65] mt-1">/api • REST Endpoints</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-white/80 border border-[#E8DEC8] shadow-sm">
@@ -531,11 +532,7 @@ export default function AdminDashboard({ onBackToStorefront }) {
                   </tr>
                 ) : (
                   filteredProducts.map((p) => {
-                    const imgSrc = p.imagePath
-                      ? p.imagePath.startsWith("http")
-                        ? p.imagePath
-                        : `http://localhost:5001${p.imagePath}`
-                      : null;
+                    const imgSrc = getProductImageUrl(p.imagePath);
 
                     return (
                       <tr key={p.id} className="hover:bg-[#FAF7F0] transition-colors">
