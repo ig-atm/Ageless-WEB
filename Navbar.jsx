@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Navbar({ cartCount = 0, onOpenCart }) {
+export default function Navbar({ cartCount = 0, onOpenCart, onOpenQuestionnaire }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -119,6 +119,21 @@ export default function Navbar({ cartCount = 0, onOpenCart }) {
             )}
           </motion.button>
 
+          {/* Build Routine Questionnaire Trigger Button */}
+          {onOpenQuestionnaire && (
+            <motion.button
+              type="button"
+              onClick={onOpenQuestionnaire}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.14em] border border-[#D4AF37] text-[#B58E24] hover:bg-amber-50/70 transition-all shadow-xs"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+              <span>Build Routine</span>
+            </motion.button>
+          )}
+
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -195,9 +210,23 @@ export default function Navbar({ cartCount = 0, onOpenCart }) {
               )}
             </button>
 
+            {onOpenQuestionnaire && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenQuestionnaire();
+                }}
+                className="w-full py-3 rounded-full text-xs font-semibold uppercase tracking-[0.14em] border border-[#D4AF37] text-[#B58E24] hover:bg-amber-50 transition-all flex items-center justify-center gap-2"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                <span>Build Routine Questionnaire</span>
+              </button>
+            )}
+
             <Link
               to="/shop"
-              className="mt-2 text-center text-xs font-semibold uppercase tracking-widest bg-[#383B35] text-[#F8F4EC] py-3.5 rounded-full shadow-md"
+              className="mt-1 text-center text-xs font-semibold uppercase tracking-widest bg-[#383B35] text-[#F8F4EC] py-3.5 rounded-full shadow-md"
             >
               Shop All Formulations
             </Link>

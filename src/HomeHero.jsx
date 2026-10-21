@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 
-export default function HomeHero() {
+export default function HomeHero({ onOpenQuestionnaire }) {
   const containerRef = useRef(null);
   const badgeRef = useRef(null);
   const line1Ref = useRef(null);
@@ -162,13 +162,24 @@ export default function HomeHero() {
             </Link>
           </div>
 
-          <div ref={secondaryBtnRef} className="w-full sm:w-auto opacity-0">
+          <div ref={secondaryBtnRef} className="w-full sm:w-auto opacity-0 flex flex-col sm:flex-row gap-3">
             <Link
               to="/philosophy"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-xs font-medium uppercase tracking-[0.16em] border border-[#383B35]/30 text-[#383B35] bg-white/40 hover:bg-white/80 active:scale-95 transition-all backdrop-blur-xs"
             >
               <span>Our Philosophy</span>
             </Link>
+
+            {onOpenQuestionnaire && (
+              <button
+                type="button"
+                onClick={onOpenQuestionnaire}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-[0.16em] border border-[#D4AF37] text-[#B58E24] bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 active:scale-95 transition-all shadow-xs"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <span>Build Routine</span>
+              </button>
+            )}
           </div>
         </div>
 

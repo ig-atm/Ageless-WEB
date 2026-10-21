@@ -9,6 +9,7 @@ import CartPage from "./pages/CartPage";
 import AdminDashboard from "./AdminDashboard";
 import SlideOutCart from "./SlideOutCart";
 import FibonacciSpiral from "./FibonacciSpiral";
+import RoutineQuestionnaireModal from "./RoutineQuestionnaireModal";
 
 // Route Page Transition Variants
 const pageVariants = {
@@ -63,6 +64,7 @@ function AppContent() {
     },
   ]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
 
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -127,7 +129,11 @@ function AppContent() {
     <div className="min-h-screen bg-[#F8F4EC] text-[#383B35] font-sans antialiased selection:bg-[#9EAA96] selection:text-[#F8F4EC] relative flex flex-col justify-between overflow-x-hidden">
       {/* 1. Global Glassmorphic Sticky Navigation Bar (hidden on admin page) */}
       {!isAdminRoute && (
-        <Navbar cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
+        <Navbar
+          cartCount={totalCartCount}
+          onOpenCart={() => setIsCartOpen(true)}
+          onOpenQuestionnaire={() => setIsQuestionnaireOpen(true)}
+        />
       )}
 
       {/* 2. Slide-out Cart Drawer with Framer Motion slide-in animations */}
@@ -139,6 +145,12 @@ function AppContent() {
         onRemoveItem={handleRemoveItem}
       />
 
+      {/* 2b. Personalized Routine Questionnaire Modal */}
+      <RoutineQuestionnaireModal
+        isOpen={isQuestionnaireOpen}
+        onClose={() => setIsQuestionnaireOpen(false)}
+      />
+
       {/* 3. React Router Route Declarations wrapped in AnimatePresence for Page Transitions */}
       <main className="flex-grow flex flex-col justify-between">
         <AnimatePresence mode="wait">
@@ -147,7 +159,10 @@ function AppContent() {
               path="/"
               element={
                 <PageTransition>
-                  <HomePage onAddToCart={handleAddToCart} />
+                  <HomePage
+                    onAddToCart={handleAddToCart}
+                    onOpenQuestionnaire={() => setIsQuestionnaireOpen(true)}
+                  />
                 </PageTransition>
               }
             />

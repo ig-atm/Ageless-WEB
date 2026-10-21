@@ -5,11 +5,11 @@ import AboutSection from "../AboutSection";
 import AgelessProductGrid from "../AgelessProductGrid";
 import CtaAndFooter from "../CtaAndFooter";
 
-export default function HomePage({ onAddToCart }) {
+export default function HomePage({ onAddToCart, onOpenQuestionnaire }) {
   return (
     <div className="w-full">
       {/* 1. Luxurious Calming Hero Section with Framer Motion Stagger */}
-      <HomeHero />
+      <HomeHero onOpenQuestionnaire={onOpenQuestionnaire} />
 
       {/* 2. Customer-Facing Product Grid */}
       <div id="shop-preview">
