@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
@@ -501,6 +502,15 @@ function Footer() {
                 {link}
               </a>
             ))}
+            <Link
+              to="/admin"
+              className="text-[0.62rem] font-light tracking-wide transition-colors duration-300 opacity-60 hover:opacity-100 flex items-center gap-1"
+              style={{ color: `${T.pearlIvory}50` }}
+              onMouseEnter={e => e.currentTarget.style.color = T.antiqueGold}
+              onMouseLeave={e => e.currentTarget.style.color = `${T.pearlIvory}50`}
+            >
+              <span>Admin / CRM</span>
+            </Link>
           </div>
 
           {/* Back to top */}

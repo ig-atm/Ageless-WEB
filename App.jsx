@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./Navbar";
 import HomePage from "./pages/HomePage";
@@ -8,6 +8,7 @@ import Philosophy from "./Philosophy";
 import CartPage from "./pages/CartPage";
 import AdminDashboard from "./AdminDashboard";
 import SlideOutCart from "./SlideOutCart";
+import FibonacciSpiral from "./FibonacciSpiral";
 
 // Route Page Transition Variants
 const pageVariants = {
@@ -108,6 +109,20 @@ function AppContent() {
 
   const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  const navigate = useNavigate();
+
+  // Keyboard shortcut (⌘+Shift+A or Ctrl+Shift+A) for admin access without storefront UI clutter
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "a") {
+        e.preventDefault();
+        navigate("/admin");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [navigate]);
+
   return (
     <div className="min-h-screen bg-[#F8F4EC] text-[#383B35] font-sans antialiased selection:bg-[#9EAA96] selection:text-[#F8F4EC] relative flex flex-col justify-between overflow-x-hidden">
       {/* 1. Global Glassmorphic Sticky Navigation Bar (hidden on admin page) */}
@@ -165,28 +180,22 @@ function AppContent() {
               }
             />
             <Route
+              path="/spiral"
+              element={
+                <PageTransition>
+                  <FibonacciSpiral />
+                </PageTransition>
+              }
+            />
+            <Route
               path="/admin"
               element={
-                <AdminDashboard onBackToStorefront={() => window.location.assign("/")} />
+                <AdminDashboard onBackToStorefront={() => navigate("/")} />
               }
             />
           </Routes>
         </AnimatePresence>
       </main>
-
-      {/* 4. Floating Client CRM Portal Access Pill */}
-      {!isAdminRoute && (
-        <div className="fixed bottom-6 right-6 z-40">
-          <Link
-            to="/admin"
-            className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#383B35] text-[#F8F4EC] text-xs font-medium tracking-wide shadow-xl hover:bg-[#657363] active:scale-95 transition-all border border-white/20 group backdrop-blur-md"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#9EAA96] group-hover:scale-125 transition-transform" />
-            <span>Client CRM Portal</span>
-            <span className="text-[10px] opacity-75 font-mono">⌘</span>
-          </Link>
-        </div>
-      )}
     </div>
   );
 }
