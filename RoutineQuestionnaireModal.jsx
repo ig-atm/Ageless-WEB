@@ -7,13 +7,13 @@ const SANS_FONT = {
 
 /**
  * 5-Stage Header Stages & Step Progress Mapping:
- * Step 1: 0%  fill ("Start" active)
- * Step 2: 20% fill ("Start" & "Primary Goal" active)
- * Step 3: 40% fill ("Start", "Primary Goal", "Additional Support" active)
- * Step 4: 50% fill ("Start", "Primary Goal", "Additional Support" active)
- * Step 5: 65% fill ("Routine Builder" active)
- * Step 6: 80% fill ("Routine Builder" active)
- * Step 7: 100% fill ("Result" active)
+ * Step 1 = 0%
+ * Step 2 = 25%
+ * Step 3 = 50%
+ * Step 4 = 65%
+ * Step 5 = 75%
+ * Step 6 = 85%
+ * Step 7 = 100%
  */
 const STAGES = [
   { id: "start", label: "Start", minStep: 1, align: "text-left" },
@@ -25,11 +25,11 @@ const STAGES = [
 
 const STEP_PERCENTAGES = {
   1: 0,
-  2: 20,
-  3: 40,
-  4: 50,
-  5: 65,
-  6: 80,
+  2: 25,
+  3: 50,
+  4: 65,
+  5: 75,
+  6: 85,
   7: 100,
 };
 
@@ -220,31 +220,41 @@ export default function RoutineQuestionnaireModal({
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-[1040px] w-full h-[520px] flex overflow-hidden shadow-2xl rounded-r-[24px] rounded-l-none relative my-auto bg-white font-sans"
       >
+        {/* Close (✕) Button in outer modal container */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close modal"
+          className="absolute top-5 right-5 text-gray-800 hover:opacity-70 transition p-2 rounded-full hover:bg-gray-100 z-20 flex items-center justify-center w-8 h-8"
+        >
+          <span className="text-xl leading-none">✕</span>
+        </button>
+
         {/* ================================================================= */}
-        {/* 1. LEFT BLACK PANEL (34% width, sharp corners, py-10)             */}
+        {/* 1. LEFT BLACK PANEL (36% width, vertically centered content)      */}
         {/* ================================================================= */}
-        <aside className="w-[34%] bg-[#0B0B0B] text-white px-10 py-10 flex flex-col justify-end rounded-none relative flex-shrink-0">
+        <aside className="w-[36%] bg-[#0E0E0E] text-white px-10 py-12 flex flex-col justify-center select-none rounded-none relative flex-shrink-0">
           <div className="flex flex-col">
-            {/* Pill Badge */}
-            <div
+            {/* Badge */}
+            <span
               style={SANS_FONT}
-              className="bg-[#2C2C2C] text-white/90 text-xs font-medium px-4 py-1.5 rounded-full w-fit mb-4"
+              className="inline-block bg-[#222222] text-[#D1D5DB] text-[12px] font-medium px-3.5 py-1 rounded-full mb-6 w-fit"
             >
               Personalised
-            </div>
+            </span>
 
-            {/* Main Heading (Explicit Sans-Serif font override) */}
+            {/* Title */}
             <h2
               style={SANS_FONT}
-              className="text-[28px] font-bold leading-[1.2] tracking-tight text-white mb-3"
+              className="text-[30px] font-bold text-white leading-[1.22] tracking-tight mb-4"
             >
-              Build a Routine, Build Better Health.
+              Build a Routine,<br />Build Better Health.
             </h2>
 
             {/* Subtext */}
             <p
               style={SANS_FONT}
-              className="text-[14px] text-white/80 leading-relaxed font-normal"
+              className="text-[14px] text-[#9CA3AF] leading-[1.5] max-w-[280px]"
             >
               Because every wellness journey is unique, yours begins with a few questions.
             </p>
@@ -252,42 +262,33 @@ export default function RoutineQuestionnaireModal({
         </aside>
 
         {/* ================================================================= */}
-        {/* 2. RIGHT WHITE PANEL (66% width, rounded-r-[24px], py-10, px-12)  */}
+        {/* 2. RIGHT WHITE PANEL (64% width, rounded-r-[24px], py-10, px-12)  */}
         {/* ================================================================= */}
-        <section className="w-[66%] bg-white px-12 py-10 flex flex-col justify-between relative rounded-r-[24px] text-[#111827]">
-          {/* Close (✕) Button */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close modal"
-            className="absolute top-6 right-6 text-gray-900 hover:opacity-70 transition p-2 rounded-full hover:bg-gray-100 z-20 flex items-center justify-center w-8 h-8"
-          >
-            <span className="text-xl leading-none">✕</span>
-          </button>
-
-          {/* TOP CONTAINER: Progress Track + Question Area (Always mt-8 below track) */}
-          <div className="w-full flex flex-col">
+        <section className="w-[64%] bg-white px-12 py-10 flex flex-col justify-between relative rounded-r-[24px] text-[#111827]">
+          {/* CONTENT CONTAINER: Progress header + Question body */}
+          <div className="flex flex-col flex-grow justify-start w-full">
             {/* Top Progress Header Container */}
-            <div className="w-full">
-              {/* Progress Track: w-full h-[4px] bg-[#EAECEF] rounded-full */}
-              <div className="w-full h-[4px] bg-[#EAECEF] rounded-full overflow-hidden mb-2.5">
-                <motion.div
-                  className="h-full bg-[#111111] rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progressPercent}%` }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            <div className="w-full mb-8">
+              {/* Progress Line */}
+              <div className="relative w-full h-[3px] bg-[#E5E7EB] rounded-full overflow-hidden mb-2.5">
+                <div
+                  className="h-full bg-[#111827] transition-all duration-300 rounded-full"
+                  style={{ width: `${progressPercent}%` }}
                 />
               </div>
 
-              {/* Labels Row: grid grid-cols-5 w-full text-[12px] */}
-              <div className="grid grid-cols-5 w-full text-[12px]" style={SANS_FONT}>
+              {/* 5 Labels Row (Strict 5-column grid layout) */}
+              <div
+                style={SANS_FONT}
+                className="w-full grid grid-cols-5 text-[11px] font-medium text-[#111827]"
+              >
                 {STAGES.map((stage) => {
                   const active = isStageActive(stage.minStep);
                   return (
                     <span
                       key={stage.id}
                       className={`${stage.align} transition-colors duration-200 ${
-                        active ? "text-[#111111] font-semibold" : "text-[#9CA3AF] font-normal"
+                        active ? "text-[#111827] font-semibold" : "text-[#9CA3AF] font-normal"
                       }`}
                     >
                       {stage.label}
@@ -297,8 +298,8 @@ export default function RoutineQuestionnaireModal({
               </div>
             </div>
 
-            {/* QUESTION AREA: Consistently starts mt-8 (32px) below progress labels */}
-            <div className="w-full mt-8">
+            {/* QUESTION BODY: Consistent top-aligned flow */}
+            <div className="w-full">
               <AnimatePresence mode="wait">
                 {/* STEP 1: NAME INPUT */}
                 {currentStep === 1 && (
@@ -700,7 +701,7 @@ export default function RoutineQuestionnaireModal({
           {/* =============================================================== */}
           {/* 3. BOTTOM NAVIGATION FOOTER (Anchored at the bottom)             */}
           {/* =============================================================== */}
-          <footer className="w-full flex items-center justify-between mt-auto pt-2">
+          <footer className="w-full flex items-center justify-between pt-6">
             {/* Left Button: ← Back */}
             <button
               type="button"
